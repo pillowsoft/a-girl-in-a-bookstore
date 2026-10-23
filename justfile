@@ -18,6 +18,6 @@ lint:
     done
     exit $bad
 
-# Deploy manually with wrangler (normal path is push to GitHub -> Cloudflare Pages)
+# Manual deploy straight to Cloudflare (normal path: push to GitHub and let Cloudflare build)
 deploy:
-    npx wrangler pages deploy public --project-name=a-girl-in-a-bookstore
+    npx wrangler deploy

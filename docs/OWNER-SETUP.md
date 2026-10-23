@@ -37,7 +37,32 @@ Check that all 7 pages load and the images and fonts show.
 
 > Cloudflare is gradually moving new projects to "Workers with static assets". If the dashboard steers you there, the same idea applies: connect the GitHub repo, no build command, asset directory `public`. The Pages route above remains the simplest for a static site.
 
-### Already have a Direct Upload project? Convert it to Git
+### Rachel's actual situation: it is a Worker, not a Pages project
+
+Checked with `wrangler deployments list`: the existing `girl-in-a-bookstore` on her account (`girlinabookstore.com`) is a **Cloudflare Worker with static assets**, deployed by upload. It is **not** a Pages project, so the "create a new project and move the domain" route below doesn't apply. Workers can be connected to GitHub in place (**Workers Builds**), which keeps the name and the domain.
+
+1. The repo now has `wrangler.jsonc` (name `girl-in-a-bookstore`, assets directory `./public`). Make sure it is on `main` first.
+2. Cloudflare dashboard → **Workers & Pages → girl-in-a-bookstore → Settings → Builds → Connect**.
+3. Choose GitHub, authorize the Cloudflare app for **only** this repo, and select `pillowsoft/a-girl-in-a-bookstore`.
+4. Settings:
+
+   | Setting | Value |
+   |---|---|
+   | Production branch | `main` |
+   | Build command | *(empty)* |
+   | Deploy command | `npx wrangler deploy` |
+   | Non-production branch deploy command | `npx wrangler versions upload` |
+   | Root directory | `/` |
+
+5. Save, then push a trivial change to a branch and confirm a preview appears. Merge to `main` and confirm the live site updates.
+6. Preview URLs for Workers must be enabled (**Settings → Domains & Routes → Preview URLs**). They look like `<id>-girl-in-a-bookstore.<account>.workers.dev`. Cloudflare reports the URL on the GitHub commit or PR, and in **Deployments**. Give that link to Rachel. Previews are **not** `*.pages.dev` here.
+7. The Worker name in `wrangler.jsonc` **must match** the Worker's name in the dashboard, or the build fails.
+
+Heads up: the live Worker has a `fetch` handler, so it runs some script I can't see. `wrangler.jsonc` deploys the site as **assets only** (no script), which serves `index.html` at `/` and every file under `public/`. Compare the live site with the first connected deploy before relying on it, especially any redirects or clean URLs like `/about`.
+
+The Pages-only instructions in Parts 1-3 (`.pages.dev` URLs, Pages Access policy, Pages rollback) differ for Workers. Rollback is under the Worker's **Deployments** tab. To keep previews private, use Cloudflare Access on the preview URLs (Settings → Domains & Routes).
+
+### Pages only: already have a Direct Upload Pages project? Convert it to Git
 
 Cloudflare **cannot** convert a Direct Upload Pages project to Git-connected, and there is no setting for it. The way around it is to create a new Git-connected project, move the domain across, and retire the old one. Visitors see no downtime if you do it in this order.
 

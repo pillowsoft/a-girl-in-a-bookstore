@@ -118,6 +118,9 @@ done
 
 ## Preview and publish (Cloudflare Pages + GitHub)
 
+> **Heads-up on Cloudflare type:** the live site is a **Cloudflare Worker with static assets** (config in `wrangler.jsonc`) connected to GitHub with Workers Builds, not a classic Pages project. The flow is identical (branch push = preview, `main` = live), but preview links look like `https://<id>-girl-in-a-bookstore.<account>.workers.dev`, not `*.pages.dev`, and Cloudflare posts them on the GitHub commit or PR and in the dashboard Deployments tab. Where the text below says `pages.dev`, use that instead. Never delete or rename `wrangler.jsonc`.
+
+
 The live site is hosted on **Cloudflare Pages**, connected to the GitHub repo `pillowsoft/a-girl-in-a-bookstore`. The rule that makes this easy:
 
 - A push to any **branch other than `main`** automatically gets its own **preview website** with a private-ish link like `https://<branch-name>.<project>.pages.dev`.
