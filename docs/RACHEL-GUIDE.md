@@ -29,7 +29,7 @@ You don't need to copy or "fork" the project into your own account. Everyone wor
 | "Change the tagline on the home page to …" | Claude edits the words. |
 | "Add this photo to the Travel page" (and give it the file) | Claude resizes the photo for phones and computers and puts it in. |
 | "Add a new page called Podcasts" | Claude creates the page and adds it to the menu and search. |
-| "Write a Journal post about …" | See **Writing blog posts** below. |
+| "Write a Books post about …" (or Travel, or Cuisine) | See **Writing blog posts** below. |
 | "Make the buttons a deeper red" | Claude changes the colors across the whole site. |
 | "Fix the Instagram link in the footer: …" | Claude updates the link. |
 | "Show me what it looks like" | Claude gives you a preview. |
@@ -50,9 +50,11 @@ You don't need to copy or "fork" the project into your own account. Everyone wor
 >
 > **Claude:** It's live at your website. Hard-refresh to see it.
 
-## Writing blog posts (the Journal)
+## Writing blog posts (Travel, Cuisine and Books)
 
-Your website has a **Journal** page in the menu. It's your blog: every post shows up there as a card, **newest first**, and each card opens the full post.
+Your blog lives on three pages in the menu: **Travel**, **Cuisine** and **Books**. Each one is its own blog. Every post belongs to one of them and shows up on that page as a card, **newest first**. Clicking a card glides smoothly into the full post.
+
+Until a page has its first post, it shows its "coming soon" notes instead. As soon as a post is published there, the list appears.
 
 You can write the post yourself, or let Claude write a first draft from your notes. Either way, **you approve the words before anything is public.**
 
@@ -60,12 +62,12 @@ You can write the post yourself, or let Claude write a first draft from your not
 
 Say something like:
 
-> I want to write a Journal post about the little bookshop I found in Lisbon. Here are my notes: *(paste anything: bullet points, rambling thoughts, a voice-memo transcript)*. Here are three photos. Make it feel warm and a bit dreamy, around 600 words.
+> I want to write a Travel post about the little bookshop I found in Lisbon. Here are my notes: *(paste anything: bullet points, rambling thoughts, a voice-memo transcript)*. Here are three photos. Make it feel warm and a bit dreamy, around 600 words.
 
 Claude will:
 1. **Write a draft** in your voice and show it to you. Read it carefully.
 2. **Ask you** about anything it's missing. It won't invent names, prices, quotes, or details. If it's unsure about a fact, it will ask.
-3. **Build the page**, add the card at the top of the Journal, and prepare your photos.
+3. **Build the page**, add the card at the top of the right page (Travel, Cuisine or Books), and prepare your photos.
 4. **Send you a preview link** so you can see exactly how it looks on your phone and computer.
 
 Then you say what to change ("shorter intro", "move the photo up", "that's not what happened, it was Tuesday") until you love it, and say **"publish"** when you're ready.
@@ -74,7 +76,8 @@ Then you say what to change ("shorter intro", "move the photo up", "that's not w
 
 | You say | What happens |
 |---|---|
-| "Write a post about X from these notes" | Claude drafts it for you to review. |
+| "Write a post about X from these notes" | Claude drafts it for you to review. Say which page it belongs on, or Claude will ask. |
+| "Move my Lisbon post from Travel to Books" | Claude moves it and updates both pages. |
 | "Here's my draft. Polish it, but keep my voice" | Claude edits lightly and shows what changed. |
 | "Give me three headline ideas" | Claude suggests titles. |
 | "Add a photo after the second paragraph, with the caption …" | Claude adds it, sized for phones. |
@@ -88,9 +91,10 @@ Then you say what to change ("shorter intro", "move the photo up", "that's not w
 - **A post stays private until you say "publish".** The preview link is how you check it.
 - **Newest first:** new posts appear at the top automatically.
 - **Real dates:** Claude uses today's date unless you say otherwise.
+- **Photos from the web:** Claude only uses photos that are free to use, and credits the photographer at the bottom of the post.
 - **Every photo needs a short description** (alt text) for blind visitors and Google. Claude will ask what's in the photo if it can't tell.
 - **The mailing list signup isn't connected yet,** so don't promise readers an email when you post.
-- You don't have to use Claude for the words. Writing it yourself and asking Claude to "turn this into a Journal post" works just as well.
+- You don't have to use Claude for the words. Writing it yourself and asking Claude to "turn this into a Books post" works just as well.
 
 ## Photos
 

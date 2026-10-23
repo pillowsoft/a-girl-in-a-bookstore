@@ -8,8 +8,8 @@
   <title>Books — Girl in a Bookstore</title>
   <link rel="preload" as="image" href="assets/images/books-960.webp" media="(max-width: 1199px)" fetchpriority="high">
   <link rel="preload" as="image" href="assets/images/books-1920.webp" media="(min-width: 1200px)" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=8">
-  <script src="site.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=9">
+  <script src="site.js?v=2" defer></script>
 </head>
 <body>
   <site-header></site-header>
@@ -31,6 +31,26 @@
         <div class="page-intro-copy reveal">
           <p class="lede">Some books explain a place. Others simply keep you company while you get there.</p>
           <p>This page is being prepared for reading lists, bookstore finds, beautiful editions, and notes on the stories that make the world feel larger.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="post-list-section" aria-labelledby="books-posts-title">
+      <div class="shell">
+        <div class="post-list-head reveal">
+          <p class="eyebrow">Newest first</p>
+          <h2 class="section-title" id="books-posts-title">Notes from the shelves.</h2>
+        </div>
+        <div class="journal-grid post-list">
+          <!-- NEW POSTS GO HERE: newest first. Post files are named books-<short-name>.html (see the edit-website skill). This section stays hidden until it has a card. -->
+        <article class="story-card reveal">
+          <a href="books-every-bookstore-a-small-country.html" class="story-card__image post-image-morph" style="view-transition-name: post-image-every-bookstore">
+            <img src="assets/images/bookstore-shelves-960.webp" srcset="assets/images/bookstore-shelves-480.webp 480w, assets/images/bookstore-shelves-960.webp 960w" sizes="(max-width: 720px) calc(100vw - 34px), (max-width: 980px) 50vw, 400px" width="3000" height="4000" alt="Wooden bookstore shelves packed with paperbacks and hardcovers, spines facing out" loading="lazy" decoding="async">
+          </a>
+          <div class="story-card__meta"><span>Books</span><time datetime="2026-10-23">Oct 23, 2026</time></div>
+          <h3 class="post-title-morph" style="view-transition-name: post-title-every-bookstore"><a href="books-every-bookstore-a-small-country.html">Every Bookstore Is a Small Country</a></h3>
+          <p>Each one has its own borders, customs and quiet language. On why bookstores are so hard to walk past.</p>
+        </article>
         </div>
       </div>
     </section>
@@ -58,14 +78,6 @@
             <p>Bindings, illustrations, inscriptions, and books that earn the precious space left in a suitcase.</p>
           </div>
         </a>
-      </div>
-    </section>
-
-    <section class="coming-soon-band">
-      <div class="shell reveal">
-        <p class="eyebrow">Check back soon</p>
-        <h2 class="section-title">The shelves are filling.</h2>
-        <p>Rachel’s first reading notes will appear here. Join the list for the opening stack.</p>
       </div>
     </section>
 

@@ -21,8 +21,9 @@ Everything lives in `public/`:
 | File | What it is |
 |---|---|
 | `index.html` | Home page |
-| `journal.html` and `journal-*.html` | The blog: the list page, and one file per post |
-| `about.html`, `travel.html`, `cuisine.html`, `books.html`, `videos.html`, `fashion.html` | The other pages |
+| `travel.html`, `cuisine.html`, `books.html` | The three blog pages: each lists its own posts |
+| `travel-*.html`, `cuisine-*.html`, `books-*.html` | One file per blog post, named after its page |
+| `about.html`, `videos.html`, `fashion.html` | The other pages |
 | `styles.css` | All colors, fonts, spacing and animations |
 | `site.js` | Menu, search, page transitions, pop-ups, and the header/footer |
 | `assets/images/` | Photos (all `.webp`, in several sizes) |

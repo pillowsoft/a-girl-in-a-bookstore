@@ -73,6 +73,29 @@ site-header {
   }
 }
 
+/* Journal: a post card's photo and title morph into the post's cover and headline.
+   The card and the post share a view-transition-name (set inline, one per post). */
+.post-image-morph {
+  view-transition-class: post-image;
+}
+
+.post-title-morph {
+  view-transition-class: post-title;
+}
+
+::view-transition-group(*.post-image),
+::view-transition-group(*.post-title) {
+  animation-duration: 560ms;
+  animation-timing-function: var(--ease);
+}
+
+::view-transition-old(*.post-image),
+::view-transition-new(*.post-image) {
+  height: 100%;
+  object-fit: cover;
+  overflow: clip;
+}
+
 *,
 *::before,
 *::after {
@@ -791,12 +814,24 @@ textarea {
   font-size: 0.9rem;
 }
 
-.journal-list {
-  padding: clamp(60px, 8vw, 110px) 0;
+.post-list-section {
+  padding: clamp(60px, 8vw, 110px) 0 0;
+}
+
+/* Until a page has its first post, its post list stays hidden. */
+.post-list-section:not(:has(.story-card)) {
+  display: none;
+}
+
+.post-list-head {
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+.post-list {
   row-gap: 60px;
 }
 
-.journal-list .story-card:nth-child(2) {
+.post-list .story-card:nth-child(2) {
   padding-top: 0;
 }
 
@@ -851,6 +886,10 @@ textarea {
   line-height: 1.1;
 }
 
+.post figure {
+  margin: 0;
+}
+
 .post img {
   height: auto;
   margin: 2em 0 0.6em;
@@ -864,6 +903,62 @@ textarea {
 
 .post__back {
   margin-top: 3em;
+}
+
+.post .post__hero {
+  width: min(calc(100% - 48px), 1040px);
+  margin: 0 auto clamp(40px, 6vw, 72px);
+}
+
+.post__hero-image {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--paper-deep);
+}
+
+.post .post__hero-image img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: cover;
+}
+
+.post__hero figcaption {
+  margin: 12px 0 0;
+}
+
+.post__credits {
+  margin-top: 4em;
+  padding-top: 1.6em;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.post .post__credits h2 {
+  margin: 0 0 0.8em;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.post__credits ul {
+  margin: 0 0 0.8em;
+  padding-left: 1.1em;
+}
+
+.post .post__credits p {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+}
+
+.post__credits a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .author-section {
@@ -1014,9 +1109,6 @@ textarea {
   background-image: url('assets/images/fashion-01-960.webp');
 }
 
-.hero-journal {
-  background-image: url('assets/images/train-960.webp');
-}
 
 .page-intro {
   padding: clamp(80px, 11vw, 140px) 0 35px;
@@ -1489,9 +1581,6 @@ textarea {
     background-image: url('assets/images/fashion-01-1920.webp');
   }
 
-  .hero-journal {
-    background-image: url('assets/images/train-1920.webp');
-  }
 
   .about-hero__image {
     background-image: url('assets/images/train-1920.webp');
@@ -1586,6 +1675,14 @@ textarea {
   .shell,
   .narrow {
     width: min(calc(100% - 34px), var(--max));
+  }
+
+  .post .post__hero {
+    width: calc(100% - 34px);
+  }
+
+  .post__hero-image {
+    aspect-ratio: 4 / 5;
   }
 
   .header-note {
@@ -1778,5 +1875,17 @@ textarea {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
   }
 }
