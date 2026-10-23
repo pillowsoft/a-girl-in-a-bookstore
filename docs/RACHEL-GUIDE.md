@@ -9,6 +9,14 @@ You don't need to know any code. You tell Claude what you want, it makes the cha
 3. **You look** on your phone and computer.
 4. **You say "publish"** and it goes live. Nothing goes live until you say so.
 
+## First-time setup (once, with your site helper)
+
+1. **Make a free GitHub account** at https://github.com/signup and send your helper your username.
+2. **Accept the invitation.** GitHub emails you an invite to the website project. Click **Accept invitation**. Nothing will save until you do.
+3. Your helper installs a few tools and downloads the website to your computer. This takes about 10 minutes, and you only do it once.
+
+You don't need to copy or "fork" the project into your own account. Everyone works on the same one.
+
 ## Getting started
 
 1. Open **Claude Code** in your website folder (`a-girl-in-a-bookstore`).
@@ -91,6 +99,6 @@ Claude will tell you if you ask, but so you know:
 ## If something goes wrong
 
 - **Preview link doesn't load:** wait a minute and refresh.
-- **Claude says it can't push or isn't logged in to GitHub:** contact the person who set up your site. This is a one-time permissions fix.
+- **Claude says it can't push or isn't logged in to GitHub:** first make sure you accepted the GitHub invitation (check your email). If you did, contact the person who set up your site. This is a one-time permissions fix.
 - **Website looks the same after publishing:** hard-refresh (**Cmd+Shift+R**).
 - **Anything else:** copy what Claude said and send it to your site helper.

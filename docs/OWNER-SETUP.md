@@ -106,10 +106,29 @@ Visitors then sign in with a one-time email code. Production stays public.
 
 ## Part 4: Set up Rachel
 
+### Who owns the repo? (decision made)
+
+The repo stays under the setup person's GitHub account (`pillowsoft`). Rachel is added as a **collaborator with Write access**. Reasons:
+
+- Fastest: no migration, and nothing in Cloudflare needs reconnecting.
+- The setup person remains admin and can fix problems on her behalf.
+- Her pushes go straight to the real repo, so previews and publishing just work.
+
+**Don't have her fork or re-clone it into her own account.** Her changes would land in a copy, the Cloudflare connection would have to follow the copy, and the two repos would drift apart.
+
+**If Rachel later wants to own it outright:** she makes a GitHub account (if she hasn't), then the repo owner goes to **Settings → General → Danger Zone → Transfer ownership**, and she then adds the setup person back as an admin collaborator. After a transfer, reconnect Cloudflare: Worker → Settings → Builds → disconnect and connect the repo again (about 2 minutes). Do this transfer *before* any long break, not mid-change.
+
 ### On GitHub
 
-1. Repo → **Settings → Collaborators → Add people**: Rachel's GitHub username, with **Write** access. (She needs a free GitHub account.)
-2. *Optional but recommended safety net:* **Settings → Branches → Add rule** for `main` → require a pull request before merging. She can't publish by accident, and you approve each release. Skip it if you want her to publish herself; the skill already tells Claude to wait for her "publish" instruction.
+1. Rachel creates a free account at https://github.com/signup (if she doesn't have one) and sends you her **username**.
+2. Invite her, either in the web UI (repo → **Settings → Collaborators → Add people**, Write role) or with the terminal:
+
+   ```bash
+   gh api -X PUT repos/pillowsoft/a-girl-in-a-bookstore/collaborators/<her-username> -f permission=push
+   ```
+
+3. She gets an email invitation. **She must click Accept** (invitations expire after 7 days). Until she does, her pushes will be rejected.
+4. *Optional but recommended safety net:* **Settings → Branches → Add rule** for `main` → require a pull request before merging. She can't publish by accident, and you approve each release. Skip it if you want her to publish herself; the skill already tells Claude to wait for her "publish" instruction.
 
 ### On her computer
 
@@ -160,5 +179,5 @@ Only needed for automation, such as listing deployments from a script.
 | Site shows a blank page or 404 | Same: output directory wrong. |
 | No preview link after a push | Wait about a minute. Check Deployments. Confirm Preview branches is set to All non-Production. |
 | Old CSS still showing | Bump `styles.css?v=N` in the HTML files, then hard-refresh. |
-| Rachel's push is rejected | She needs Write access (Part 4), and `gh auth login` done. |
+| Rachel's push is rejected | She hasn't accepted the GitHub invitation, doesn't have Write access (Part 4), or `gh auth login` isn't done. |
 | Preview asks for a login | The access policy is on (Part 2). Add her email. |
