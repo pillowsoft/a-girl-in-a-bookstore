@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Reading lists, book notes, and beautiful editions from Girl in a Bookstore.">
+  <meta name="theme-color" content="#171814">
+  <title>Books — Girl in a Bookstore</title>
+  <link rel="preload" as="image" href="assets/images/books-960.webp" media="(max-width: 1199px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/books-1920.webp" media="(min-width: 1200px)" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css?v=6">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <site-header></site-header>
+  <main id="main-content">
+    <section class="page-hero hero-books" aria-labelledby="page-title">
+      <div class="shell page-hero__content">
+        <p class="eyebrow">Between the covers</p>
+        <h1 class="display" id="page-title">Read<br>everywhere.</h1>
+        <p>Books chosen for trains, planes, unfamiliar rooms, and the irresistible shop just around the corner.</p>
+      </div>
+    </section>
+
+    <section class="page-intro" aria-labelledby="books-intro-title">
+      <div class="shell page-intro-grid">
+        <div class="reveal">
+          <p class="eyebrow">The reading room</p>
+          <h2 class="section-title" id="books-intro-title">A good journey deserves the right book.</h2>
+        </div>
+        <div class="page-intro-copy reveal">
+          <p class="lede">Some books explain a place. Others simply keep you company while you get there.</p>
+          <p>This page is being prepared for reading lists, bookstore finds, beautiful editions, and notes on the stories that make the world feel larger.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="dispatches" aria-label="Upcoming book dispatches">
+      <div class="shell dispatch-grid">
+        <a class="dispatch-card reveal" href="#newsletter" data-coming-soon>
+          <div class="dispatch-card__top"><span>Reading list</span><span>01</span></div>
+          <div>
+            <h2>Books for the overnight train</h2>
+            <p>Stories with enough atmosphere for the dining car and enough momentum to carry you through the dark.</p>
+          </div>
+        </a>
+        <a class="dispatch-card reveal" href="#newsletter" data-coming-soon>
+          <div class="dispatch-card__top"><span>Bookstores</span><span>02</span></div>
+          <div>
+            <h2>The shelf I always check first</h2>
+            <p>A personal field guide to browsing well — especially when the language, layout, or hours are unfamiliar.</p>
+          </div>
+        </a>
+        <a class="dispatch-card reveal" href="#newsletter" data-coming-soon>
+          <div class="dispatch-card__top"><span>Objects</span><span>03</span></div>
+          <div>
+            <h2>Beautiful editions, found abroad</h2>
+            <p>Bindings, illustrations, inscriptions, and books that earn the precious space left in a suitcase.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="coming-soon-band">
+      <div class="shell reveal">
+        <p class="eyebrow">Check back soon</p>
+        <h2 class="section-title">The shelves are filling.</h2>
+        <p>Rachel’s first reading notes will appear here. Join the list for the opening stack.</p>
+      </div>
+    </section>
+
+    <section class="newsletter" id="newsletter" aria-labelledby="newsletter-title">
+      <div class="shell newsletter-grid">
+        <div class="reveal">
+          <p class="eyebrow">A note in the margin</p>
+          <h2 class="section-title" id="newsletter-title">Get the reading list.</h2>
+        </div>
+        <form class="newsletter-form reveal" data-newsletter-form>
+          <label class="visually-hidden" for="books-email">Email address</label>
+          <input id="books-email" type="email" placeholder="Your email address" autocomplete="email" required>
+          <button class="button button--light" type="submit">Subscribe</button>
+          <p class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <site-footer></site-footer>
+</body>
+</html>

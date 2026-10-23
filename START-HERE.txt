@@ -1,0 +1,21 @@
+A Girl in a Bookstore — Complete Site Export
+
+This ZIP includes the complete tracked project source, all seven HTML pages,
+CSS, JavaScript, local images, and fonts.
+
+To view the static site:
+1. Extract this ZIP.
+2. Open the public folder and double-click index.html.
+   For a local web server, run from the extracted project folder:
+   python3 -m http.server 8000 --directory public
+   Then visit http://localhost:8000
+
+To edit or run the full framework project:
+See README.md. Node.js 22.13 or newer is required; run npm install, then npm run dev.
+
+The public folder can also be hosted directly as a static website.
+External links and embedded services still require an internet connection.
+Git history, installed dependencies, and authentication credentials are excluded.
+
+Source commit: 4c9ce02099c54778fc4459a6c55ea28898329121
+Exported: October 23, 2026

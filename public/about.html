@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Meet Rachel Reynolds, the writer and traveler behind Girl in a Bookstore.">
+  <meta name="theme-color" content="#171814">
+  <title>About Rachel — Girl in a Bookstore</title>
+  <link rel="preload" as="image" href="assets/images/train-960.webp" media="(max-width: 1199px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/train-1920.webp" media="(min-width: 1200px)" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css?v=6">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <site-header></site-header>
+
+  <main id="main-content">
+    <section class="about-hero" aria-labelledby="about-title">
+      <div class="about-hero__image" role="img" aria-label="A richly appointed cabin on a classic train"></div>
+      <div class="about-hero__copy">
+        <div>
+          <p class="eyebrow">About me</p>
+          <h1 class="display" id="about-title">My<br>story.</h1>
+          <p class="lede">I’m Rachel — the girl in a bookstore, a lover of faraway places, and a believer that a beautiful story can begin almost anywhere.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section" aria-labelledby="story-title">
+      <div class="shell story-layout">
+        <aside class="story-sidebar reveal">
+          <p class="eyebrow">The short version</p>
+          <h2 class="section-title" id="story-title">Reader.<br>Writer.<br>Explorer.</h2>
+          <img src="assets/images/portrait-480.webp" srcset="assets/images/portrait-320.webp 320w, assets/images/portrait-480.webp 480w" sizes="(max-width: 720px) 320px, 220px" width="480" height="640" alt="Rachel Reynolds smiling" loading="lazy" decoding="async">
+        </aside>
+        <div class="story-body reveal">
+          <p class="lede">Books have delighted me since childhood, and the excitement I feel about going somewhere — almost anywhere — has always been part of who I am.</p>
+          <p>Bringing adventurous travel and literary discovery together feels natural. I laugh often, love trying new foods, and will take on nearly any challenge if there is something beautiful, surprising, or unseen on the other side.</p>
+          <p>I’m optimistic by nature and make friends far and wide. I also confess to an enduring affection for beauty, fashion, and an excellent pair of shoes. Girl in a Bookstore makes room for all of it: the intellect and the instinct, the well-planned itinerary and the happy detour.</p>
+
+          <blockquote class="pullquote">“The world gets more interesting when you follow the stories.”</blockquote>
+
+          <p>My background is in journalism and writing. I earned a bachelor’s degree in journalism from Northwestern University and a master’s degree in writing from Johns Hopkins University. I also studied at Georgetown University Law Center before deciding that the life I wanted to write was elsewhere.</p>
+          <p>This travel journal began with the support of an Individual Artist Fellowship from the Indy Arts Council, funded by Lilly Endowment. I’m deeply grateful for the opportunity it created.</p>
+
+          <div class="credentials" aria-label="Rachel’s background">
+            <div class="credential">
+              <strong>Journalism</strong>
+              <span>Northwestern University</span>
+            </div>
+            <div class="credential">
+              <strong>Writing</strong>
+              <span>Johns Hopkins University</span>
+            </div>
+            <div class="credential">
+              <strong>Law studies</strong>
+              <span>Georgetown University</span>
+            </div>
+            <div class="credential">
+              <strong>Artist Fellow</strong>
+              <span>Indy Arts Council</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="collaborate" aria-labelledby="collaborate-title">
+      <div class="shell collaborate-grid">
+        <div class="collaborate-copy reveal">
+          <p class="eyebrow">Work together</p>
+          <h2 class="section-title" id="collaborate-title">Let’s collaborate.</h2>
+          <p>I welcome thoughtful partnerships with destinations, excursions, bookstores, cultural organizations, and brands that fit the journal’s values and mission.</p>
+          <p>Tell me what you’re imagining, where it might lead, and why it belongs in this story.</p>
+        </div>
+        <form class="contact-form reveal" data-contact-form>
+          <div class="field">
+            <label for="first-name">First name</label>
+            <input id="first-name" name="first-name" autocomplete="given-name" required>
+          </div>
+          <div class="field">
+            <label for="last-name">Last name</label>
+            <input id="last-name" name="last-name" autocomplete="family-name" required>
+          </div>
+          <div class="field field--wide">
+            <label for="contact-email">Email</label>
+            <input id="contact-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field field--wide">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <div class="field--wide">
+            <button class="button button--rust" type="submit">Send a note</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="newsletter" id="newsletter" aria-labelledby="newsletter-title">
+      <div class="shell newsletter-grid">
+        <div class="reveal">
+          <p class="eyebrow">Letters from the road</p>
+          <h2 class="section-title" id="newsletter-title">Come along.</h2>
+        </div>
+        <form class="newsletter-form reveal" data-newsletter-form>
+          <label class="visually-hidden" for="about-email">Email address</label>
+          <input id="about-email" type="email" placeholder="Your email address" autocomplete="email" required>
+          <button class="button button--light" type="submit">Subscribe</button>
+          <p class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <site-footer></site-footer>
+</body>
+</html>

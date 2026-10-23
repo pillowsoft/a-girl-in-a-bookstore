@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Literary travel dispatches from Girl in a Bookstore — bookstores, writers’ homes, museums, post offices, and worthy detours.">
+  <meta name="theme-color" content="#171814">
+  <title>Travel — Girl in a Bookstore</title>
+  <link rel="preload" as="image" href="assets/images/travel-960.webp" media="(max-width: 1199px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/travel-1920.webp" media="(min-width: 1200px)" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css?v=6">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <site-header></site-header>
+  <main id="main-content">
+    <section class="page-hero hero-travel" aria-labelledby="page-title">
+      <div class="shell page-hero__content">
+        <p class="eyebrow">The travel desk</p>
+        <h1 class="display" id="page-title">Go<br>somewhere.</h1>
+        <p>Bookstores, writers’ houses, beautiful museums, post offices, and the detours that become the whole reason for going.</p>
+      </div>
+    </section>
+
+    <section class="page-intro" aria-labelledby="travel-intro-title">
+      <div class="shell page-intro-grid">
+        <div class="reveal">
+          <p class="eyebrow">Travel with a plot</p>
+          <h2 class="section-title" id="travel-intro-title">Follow the story, not just the map.</h2>
+        </div>
+        <div class="page-intro-copy reveal">
+          <p class="lede">The best journeys are anchored by curiosity: a room where someone wrote, a counter where letters still arrive, a shelf that could only exist in this place.</p>
+          <p>This is where Rachel’s itineraries, field notes, practical discoveries, and beautiful wrong turns will live. The first dispatches are currently being prepared.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="dispatches" aria-label="Upcoming travel dispatches">
+      <div class="shell dispatch-grid">
+        <a class="dispatch-card reveal" href="#newsletter" data-coming-soon>
+          <div class="dispatch-card__top"><span>Bookstores</span><span>01</span></div>
+          <div>
+            <h2>Bookshops worth crossing a city for</h2>
+            <p>Independent shelves, remarkable rooms, and the people who make a bookstore feel like a destination.</p>
+          </div>
+        </a>
+        <a class="dispatch-card reveal" href="#newsletter" data-coming-soon>
+          <div class="dispatch-card__top"><span>Postal</span><span>02</span></div>
+          <div>
+            <h2>Post offices with stories to tell</h2>
+            <p>Architecture, correspondence, and the enduring romance of sending something tangible home.</p>
+          </div>
+        </a>
+        <a class="dispatch-card reveal" href="#newsletter" data-coming-soon>
+          <div class="dispatch-card__top"><span>Literary places</span><span>03</span></div>
+          <div>
+            <h2>Writers’ houses, room by room</h2>
+            <p>The desks, windows, libraries, and ordinary details that remain after an extraordinary life.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="coming-soon-band">
+      <div class="shell reveal">
+        <p class="eyebrow">Check back soon</p>
+        <h2 class="section-title">The suitcase is open.</h2>
+        <p>Rachel’s first full travel stories will appear here. Join the mailing list to receive the opening dispatch.</p>
+      </div>
+    </section>
+
+    <section class="newsletter" id="newsletter" aria-labelledby="newsletter-title">
+      <div class="shell newsletter-grid">
+        <div class="reveal">
+          <p class="eyebrow">Don’t miss the train</p>
+          <h2 class="section-title" id="newsletter-title">Get the first dispatch.</h2>
+        </div>
+        <form class="newsletter-form reveal" data-newsletter-form>
+          <label class="visually-hidden" for="travel-email">Email address</label>
+          <input id="travel-email" type="email" placeholder="Your email address" autocomplete="email" required>
+          <button class="button button--light" type="submit">Subscribe</button>
+          <p class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <site-footer></site-footer>
+</body>
+</html>

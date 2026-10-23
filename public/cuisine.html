@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cafés, markets, meals, and culinary field notes from Girl in a Bookstore.">
+  <meta name="theme-color" content="#171814">
+  <title>Cuisine — Girl in a Bookstore</title>
+  <link rel="preload" as="image" href="assets/images/cuisine-960.webp" media="(max-width: 1199px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/cuisine-1920.webp" media="(min-width: 1200px)" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css?v=6">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <site-header></site-header>
+  <main id="main-content">
+    <section class="page-hero hero-cuisine" aria-labelledby="page-title">
+      <div class="shell page-hero__content">
+        <p class="eyebrow">At the table</p>
+        <h1 class="display" id="page-title">Taste<br>the place.</h1>
+        <p>Markets in the morning, cafés after the museum, and the meals that turn a journey into a memory.</p>
+      </div>
+    </section>
+
+    <section class="page-intro" aria-labelledby="cuisine-intro-title">
+      <div class="shell page-intro-grid">
+        <div class="reveal">
+          <p class="eyebrow">A delicious detour</p>
+          <h2 class="section-title" id="cuisine-intro-title">Every table tells you where you are.</h2>
+        </div>
+        <div class="page-intro-copy reveal">
+          <p class="lede">Food is a kind of local literature — full of history, ritual, character, and details that don’t quite translate.</p>
+          <p>Rachel loves trying new foods of every kind. This page will hold the cafés, markets, menus, and memorable hosts discovered along the way.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="dispatches" aria-label="Upcoming cuisine dispatches">
+      <div class="shell dispatch-grid">
+        <a class="dispatch-card reveal" href="#newsletter" data-coming-soon>
+          <div class="dispatch-card__top"><span>Cafés</span><span>01</span></div>
+          <div>
+            <h2>The reading café</h2>
+            <p>A search for corners that welcome a long lunch, one more chapter, and nowhere else to be.</p>
+          </div>
+        </a>
+        <a class="dispatch-card reveal" href="#newsletter" data-coming-soon>
+          <div class="dispatch-card__top"><span>Markets</span><span>02</span></div>
+          <div>
+            <h2>Notes from the market</h2>
+            <p>Colors, conversations, unfamiliar ingredients, and the first taste of a city waking up.</p>
+          </div>
+        </a>
+        <a class="dispatch-card reveal" href="#newsletter" data-coming-soon>
+          <div class="dispatch-card__top"><span>Menus</span><span>03</span></div>
+          <div>
+            <h2>A literary lunch</h2>
+            <p>Meals near libraries, museums, bookstores, and the places where a writer once ordered the usual.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="coming-soon-band">
+      <div class="shell reveal">
+        <p class="eyebrow">Check back soon</p>
+        <h2 class="section-title">A place is being set.</h2>
+        <p>The cuisine journal is still in the kitchen. Join the list and Rachel will send word when it’s ready.</p>
+      </div>
+    </section>
+
+    <section class="newsletter" id="newsletter" aria-labelledby="newsletter-title">
+      <div class="shell newsletter-grid">
+        <div class="reveal">
+          <p class="eyebrow">Save a seat</p>
+          <h2 class="section-title" id="newsletter-title">Join the mailing list.</h2>
+        </div>
+        <form class="newsletter-form reveal" data-newsletter-form>
+          <label class="visually-hidden" for="cuisine-email">Email address</label>
+          <input id="cuisine-email" type="email" placeholder="Your email address" autocomplete="email" required>
+          <button class="button button--light" type="submit">Subscribe</button>
+          <p class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <site-footer></site-footer>
+</body>
+</html>

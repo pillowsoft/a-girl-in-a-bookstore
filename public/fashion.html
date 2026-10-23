@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rachel Reynolds’ traveling wardrobe and fashion portfolio for Girl in a Bookstore.">
+  <meta name="theme-color" content="#171814">
+  <title>Fashion — Girl in a Bookstore</title>
+  <link rel="preload" as="image" href="assets/images/fashion-01-960.webp" media="(max-width: 1199px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/fashion-01-1920.webp" media="(min-width: 1200px)" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css?v=6">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <site-header></site-header>
+  <main id="main-content">
+    <section class="page-hero hero-fashion" aria-labelledby="page-title">
+      <div class="shell page-hero__content">
+        <p class="eyebrow">The traveling wardrobe</p>
+        <h1 class="display" id="page-title">Wear<br>the story.</h1>
+        <p>Personal style, beautiful details, and what to wear when the itinerary includes a train, a museum, and a bookstore.</p>
+      </div>
+    </section>
+
+    <section class="page-intro" aria-labelledby="fashion-intro-title">
+      <div class="shell page-intro-grid">
+        <div class="reveal">
+          <p class="eyebrow">The portfolio</p>
+          <h2 class="section-title" id="fashion-intro-title">A little glamour belongs in the suitcase.</h2>
+        </div>
+        <div class="page-intro-copy reveal">
+          <p class="lede">Style is another way of paying attention — to mood, place, color, history, and the particular person you want to be that day.</p>
+          <p>This opening portfolio preserves the original site’s fashion outline and gives it a more intentional editorial frame. Project details can be added as the collection develops.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" aria-label="Fashion portfolio">
+      <div class="portfolio-grid">
+        <article class="portfolio-card reveal">
+          <img src="assets/images/fashion-01-960.webp" srcset="assets/images/fashion-01-480.webp 480w, assets/images/fashion-01-960.webp 960w" sizes="(max-width: 720px) calc(100vw - 34px), (max-width: 1240px) 33vw, 400px" width="2500" height="1666" alt="Editorial fashion portrait" loading="lazy" decoding="async">
+          <div class="portfolio-card__label"><small>Portfolio 01</small><strong>On the road</strong></div>
+        </article>
+        <article class="portfolio-card reveal">
+          <img src="assets/images/fashion-02-960.webp" srcset="assets/images/fashion-02-480.webp 480w, assets/images/fashion-02-960.webp 960w" sizes="(max-width: 720px) calc(100vw - 34px), (max-width: 1240px) 33vw, 400px" width="2500" height="3758" alt="Fashion editorial detail" loading="lazy" decoding="async">
+          <div class="portfolio-card__label"><small>Portfolio 02</small><strong>Bookstore uniform</strong></div>
+        </article>
+        <article class="portfolio-card reveal">
+          <img src="assets/images/fashion-03-960.webp" srcset="assets/images/fashion-03-480.webp 480w, assets/images/fashion-03-960.webp 960w" sizes="(max-width: 720px) calc(100vw - 34px), (max-width: 1240px) 33vw, 400px" width="2400" height="2399" alt="Travel fashion editorial" loading="lazy" decoding="async">
+          <div class="portfolio-card__label"><small>Portfolio 03</small><strong>Going places</strong></div>
+        </article>
+        <article class="portfolio-card reveal">
+          <img src="assets/images/fashion-04-960.webp" srcset="assets/images/fashion-04-480.webp 480w, assets/images/fashion-04-960.webp 960w" sizes="(max-width: 720px) calc(100vw - 34px), (max-width: 1240px) 33vw, 400px" width="2394" height="2393" alt="Colorful fashion look" loading="lazy" decoding="async">
+          <div class="portfolio-card__label"><small>Portfolio 04</small><strong>In full color</strong></div>
+        </article>
+        <article class="portfolio-card reveal">
+          <img src="assets/images/fashion-05-960.webp" srcset="assets/images/fashion-05-480.webp 480w, assets/images/fashion-05-960.webp 960w" sizes="(max-width: 720px) calc(100vw - 34px), (max-width: 1240px) 33vw, 400px" width="2333" height="1556" alt="Classic fashion portrait" loading="lazy" decoding="async">
+          <div class="portfolio-card__label"><small>Portfolio 05</small><strong>Traveling light</strong></div>
+        </article>
+        <article class="portfolio-card reveal">
+          <img src="assets/images/fashion-06-960.webp" srcset="assets/images/fashion-06-480.webp 480w, assets/images/fashion-06-960.webp 960w" sizes="(max-width: 720px) calc(100vw - 34px), (max-width: 1240px) 33vw, 400px" width="2105" height="1403" alt="Evening fashion editorial" loading="lazy" decoding="async">
+          <div class="portfolio-card__label"><small>Portfolio 06</small><strong>After hours</strong></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="newsletter" id="newsletter" aria-labelledby="newsletter-title">
+      <div class="shell newsletter-grid">
+        <div class="reveal">
+          <p class="eyebrow">What to pack</p>
+          <h2 class="section-title" id="newsletter-title">Follow the wardrobe.</h2>
+        </div>
+        <form class="newsletter-form reveal" data-newsletter-form>
+          <label class="visually-hidden" for="fashion-email">Email address</label>
+          <input id="fashion-email" type="email" placeholder="Your email address" autocomplete="email" required>
+          <button class="button button--light" type="submit">Subscribe</button>
+          <p class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <site-footer></site-footer>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Travel films and video dispatches from Girl in a Bookstore.">
+  <meta name="theme-color" content="#171814">
+  <title>Videos — Girl in a Bookstore</title>
+  <link rel="preload" as="image" href="assets/images/videos-960.webp" media="(max-width: 1199px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/videos-1920.webp" media="(min-width: 1200px)" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css?v=6">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <site-header></site-header>
+  <main id="main-content">
+    <section class="page-hero hero-videos" aria-labelledby="page-title">
+      <div class="shell page-hero__content">
+        <p class="eyebrow">Watch the journey</p>
+        <h1 class="display" id="page-title">See<br>the story.</h1>
+        <p>Vivid travel diaries, bookstore visits, conversations, and the moments that are better left moving.</p>
+      </div>
+    </section>
+
+    <section class="page-intro" aria-labelledby="video-intro-title">
+      <div class="shell page-intro-grid">
+        <div class="reveal">
+          <p class="eyebrow">The channel</p>
+          <h2 class="section-title" id="video-intro-title">Some places need to be seen.</h2>
+        </div>
+        <div class="page-intro-copy reveal">
+          <p class="lede">Come through the door, hear the room, meet the people, and look down the road Rachel has just discovered.</p>
+          <p>The film channel is currently in production. The opening reel below is ready for Rachel’s first video embed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" aria-label="Featured video">
+      <div class="video-feature reveal">
+        <button class="play-button" type="button" aria-label="Play channel preview" data-play-video>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="m8 5 11 7-11 7z"></path></svg>
+        </button>
+      </div>
+    </section>
+
+    <section class="dispatches" aria-label="Upcoming video series">
+      <div class="shell dispatch-grid">
+        <a class="dispatch-card reveal" href="#newsletter" data-coming-soon>
+          <div class="dispatch-card__top"><span>Series</span><span>01</span></div>
+          <div>
+            <h2>Inside the bookstore</h2>
+            <p>Walk-throughs, conversations with booksellers, and a closer look at remarkable rooms.</p>
+          </div>
+        </a>
+        <a class="dispatch-card reveal" href="#newsletter" data-coming-soon>
+          <div class="dispatch-card__top"><span>Travel diary</span><span>02</span></div>
+          <div>
+            <h2>One literary day</h2>
+            <p>A morning-to-night itinerary told through movement, sound, small details, and one excellent meal.</p>
+          </div>
+        </a>
+        <a class="dispatch-card reveal" href="#newsletter" data-coming-soon>
+          <div class="dispatch-card__top"><span>Short film</span><span>03</span></div>
+          <div>
+            <h2>Letters from far away</h2>
+            <p>Postcards in motion from post offices, hotel writing desks, station platforms, and roads between.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="newsletter" id="newsletter" aria-labelledby="newsletter-title">
+      <div class="shell newsletter-grid">
+        <div class="reveal">
+          <p class="eyebrow">Opening reel</p>
+          <h2 class="section-title" id="newsletter-title">Watch from the beginning.</h2>
+        </div>
+        <form class="newsletter-form reveal" data-newsletter-form>
+          <label class="visually-hidden" for="videos-email">Email address</label>
+          <input id="videos-email" type="email" placeholder="Your email address" autocomplete="email" required>
+          <button class="button button--light" type="submit">Subscribe</button>
+          <p class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="video-dialog" data-video-dialog aria-label="Channel preview">
+    <div class="dialog-inner">
+      <button class="icon-button dialog-close" type="button" aria-label="Close video preview" data-close-video>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m5 5 14 14M19 5 5 19"></path></svg>
+      </button>
+      <p class="eyebrow">Coming soon</p>
+      <h2 class="dialog-title">The first film is on its way.</h2>
+      <p>This player is ready for Rachel’s first YouTube or Vimeo link. Join the list and you’ll know when the opening reel goes live.</p>
+      <a class="button button--rust" href="#newsletter" onclick="this.closest('dialog').close()">Join the list</a>
+    </div>
+  </dialog>
+
+  <site-footer></site-footer>
+</body>
+</html>
