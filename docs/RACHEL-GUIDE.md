@@ -29,6 +29,7 @@ You don't need to copy or "fork" the project into your own account. Everyone wor
 | "Change the tagline on the home page to …" | Claude edits the words. |
 | "Add this photo to the Travel page" (and give it the file) | Claude resizes the photo for phones and computers and puts it in. |
 | "Add a new page called Podcasts" | Claude creates the page and adds it to the menu and search. |
+| "Write a Journal post about …" | See **Writing blog posts** below. |
 | "Make the buttons a deeper red" | Claude changes the colors across the whole site. |
 | "Fix the Instagram link in the footer: …" | Claude updates the link. |
 | "Show me what it looks like" | Claude gives you a preview. |
@@ -39,7 +40,7 @@ You don't need to copy or "fork" the project into your own account. Everyone wor
 
 > **You:** On the About page, change "lifelong reader" to "lifelong bookworm".
 >
-> **Claude:** Done. Here's your preview: `https://…pages.dev`. It may take a minute to appear. Does that look right?
+> **Claude:** Done. Here's your preview: `https://…workers.dev`. It may take a minute to appear. Does that look right?
 >
 > **You:** Yes, but make it bold.
 >
@@ -48,6 +49,48 @@ You don't need to copy or "fork" the project into your own account. Everyone wor
 > **You:** Looks great, publish it.
 >
 > **Claude:** It's live at your website. Hard-refresh to see it.
+
+## Writing blog posts (the Journal)
+
+Your website has a **Journal** page in the menu. It's your blog: every post shows up there as a card, **newest first**, and each card opens the full post.
+
+You can write the post yourself, or let Claude write a first draft from your notes. Either way, **you approve the words before anything is public.**
+
+### The easy way: give Claude your notes
+
+Say something like:
+
+> I want to write a Journal post about the little bookshop I found in Lisbon. Here are my notes: *(paste anything: bullet points, rambling thoughts, a voice-memo transcript)*. Here are three photos. Make it feel warm and a bit dreamy, around 600 words.
+
+Claude will:
+1. **Write a draft** in your voice and show it to you. Read it carefully.
+2. **Ask you** about anything it's missing. It won't invent names, prices, quotes, or details. If it's unsure about a fact, it will ask.
+3. **Build the page**, add the card at the top of the Journal, and prepare your photos.
+4. **Send you a preview link** so you can see exactly how it looks on your phone and computer.
+
+Then you say what to change ("shorter intro", "move the photo up", "that's not what happened, it was Tuesday") until you love it, and say **"publish"** when you're ready.
+
+### Useful things to say
+
+| You say | What happens |
+|---|---|
+| "Write a post about X from these notes" | Claude drafts it for you to review. |
+| "Here's my draft. Polish it, but keep my voice" | Claude edits lightly and shows what changed. |
+| "Give me three headline ideas" | Claude suggests titles. |
+| "Add a photo after the second paragraph, with the caption …" | Claude adds it, sized for phones. |
+| "Change the date to last Friday" | Claude updates it and the order on the list. |
+| "Fix a typo in my Lisbon post" | Claude fixes it. Preview and publish as usual. |
+| "Take the Lisbon post down" | Claude removes it after checking with you. |
+| "Save this as a draft and don't publish yet" | Claude gives you a preview link only. Nothing goes live. |
+
+### Good to know
+
+- **A post stays private until you say "publish".** The preview link is how you check it.
+- **Newest first:** new posts appear at the top automatically.
+- **Real dates:** Claude uses today's date unless you say otherwise.
+- **Every photo needs a short description** (alt text) for blind visitors and Google. Claude will ask what's in the photo if it can't tell.
+- **The mailing list signup isn't connected yet,** so don't promise readers an email when you post.
+- You don't have to use Claude for the words. Writing it yourself and asking Claude to "turn this into a Journal post" works just as well.
 
 ## Photos
 
@@ -60,7 +103,7 @@ Large camera photos are fine to give Claude. You don't need to resize them.
 
 ## Previewing
 
-- A preview link looks like `https://something.your-site.pages.dev`.
+- A preview link looks like `https://something-girl-in-a-bookstore.your-account.workers.dev`.
 - It takes about **1 minute** to appear after Claude sends it. If it says "not found", wait and refresh.
 - Check it on your **phone** and your **computer**. Phones and desktops can look different.
 - You may be asked to enter your email to see a preview. A code is emailed to you. This keeps unfinished work private.

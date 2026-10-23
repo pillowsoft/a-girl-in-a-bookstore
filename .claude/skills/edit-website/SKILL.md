@@ -21,6 +21,7 @@ Everything lives in `public/`:
 | File | What it is |
 |---|---|
 | `index.html` | Home page |
+| `journal.html` and `journal-*.html` | The blog: the list page, and one file per post |
 | `about.html`, `travel.html`, `cuisine.html`, `books.html`, `videos.html`, `fashion.html` | The other pages |
 | `styles.css` | All colors, fonts, spacing and animations |
 | `site.js` | Menu, search, page transitions, pop-ups, and the header/footer |
@@ -42,6 +43,44 @@ The menu bar, search box and footer are written **once**, in `site.js` (`SiteHea
 2. Change the `<title>`, the `description` meta tag, and the page text.
 3. Add it to the `pages` list at the top of `site.js` so it appears in the menu and search.
 4. Add a hero image rule in `styles.css`, following the pattern of the existing `hero-books`, `hero-travel`, etc.
+
+## Blog posts (the Journal)
+
+The Journal is the blog: `public/journal.html` lists posts **newest first**, and each post is its own page named `journal-<short-name>.html` (all in `public/`, no subfolders). There's no database or build step: a post is a file plus a card on the list.
+
+### When Rachel wants a new post
+
+1. **Get the material.** Ask for her notes, bullet points, a voice-memo transcript, or a rough draft, plus the photos. Ask what she wants it to feel like, and who it's for.
+2. **Draft it in her voice.** Warm, curious, literary, first person, like the existing pages. Aim for 400-900 words unless she says otherwise. **Never invent facts**: names, places, prices, quotes, dates, opening hours, or things she "saw". If something is missing, ask or leave it out. Show her the text and **get her OK on the words before building the page.**
+3. **Create the page:** copy `.claude/skills/edit-website/post-template.html` to `public/journal-<short-name>.html` (lowercase, dashes, e.g. `journal-lisbon-bookshops.html`), then fill in:
+   - `<title>` and the `description` meta (one sentence; this is what Google shows)
+   - the category (Travel, Cuisine, Books, Videos, Fashion or Notes) and the **real date**, both in the visible text and in `datetime="YYYY-MM-DD"`
+   - the headline, a one- or two-sentence `post__lede`, then the paragraphs (`<p>`) and optional `<h2>` section headings
+   - photos in `<figure>` blocks, using the image steps above (resize, `srcset`, real `alt`)
+   - remove any template placeholder text that's left over
+4. **Add a card to the list**: paste this at the **top** of the `journal-grid` in `journal.html`, directly under the `NEW POSTS GO HERE` comment, so the newest post is first:
+
+   ```html
+   <article class="story-card reveal">
+     <a href="journal-lisbon-bookshops.html" class="story-card__image">
+       <img src="assets/images/lisbon-960.webp" srcset="assets/images/lisbon-480.webp 480w, assets/images/lisbon-960.webp 960w" sizes="(max-width: 720px) calc(100vw - 34px), 33vw" width="4000" height="3000" alt="Describe the cover photo" loading="lazy" decoding="async">
+     </a>
+     <div class="story-card__meta"><span>Travel</span><time datetime="2026-10-23">Oct 23, 2026</time></div>
+     <h3><a href="journal-lisbon-bookshops.html">Post title</a></h3>
+     <p>One or two sentences that make you want to read it.</p>
+   </article>
+   ```
+
+5. **After the first real post only:** delete the "The first dispatches are on their way" `coming-soon-band` section from `journal.html`. Offer to replace the three placeholder "First dispatches" cards on `index.html` with the latest three real posts (same card HTML).
+6. Run `just sitemap` (refreshes `public/sitemap.xml` for Google), then `just lint`, and check the post and the list at phone and desktop width, then follow the normal **preview, approve, publish** steps. An unmerged branch is effectively a **draft**: the post exists only at the preview link until she says publish.
+
+### Editing, reordering, removing
+
+- **Fix a typo or change a post:** edit its `journal-*.html` file (and the card text if the title or summary changed).
+- **Order:** newest first means position in `journal.html`, not the date text. If she backdates or publishes out of order, move the card.
+- **Take a post down:** remove its card and its file, after asking her. Deleted pages still exist in git history if she changes her mind.
+- Posts are not in the site search or the menu (those use the `pages` list in `site.js` and are for the main pages only). Don't add every post there.
+- Not built yet, and not needed until she asks: an RSS feed, a categories filter, comments, and email-on-new-post.
 
 ## Colors, fonts and style
 
@@ -116,24 +155,19 @@ done
 - **Many "Coming soon" cards** link to nowhere (`data-coming-soon`). When she writes a real story, replace the card with a real link or page.
 - The social links in the footer are generic.
 
-## Preview and publish (Cloudflare Pages + GitHub)
+## Preview and publish (Cloudflare Workers + GitHub)
 
-> **Heads-up on Cloudflare type:** the live site is a **Cloudflare Worker with static assets** (config in `wrangler.jsonc`) connected to GitHub with Workers Builds, not a classic Pages project. The flow is identical (branch push = preview, `main` = live), but preview links look like `https://<id>-girl-in-a-bookstore.<account>.workers.dev`, not `*.pages.dev`, and Cloudflare posts them on the GitHub commit or PR and in the dashboard Deployments tab. Where the text below says `pages.dev`, use that instead. Never delete or rename `wrangler.jsonc`.
+The live site (`girlinabookstore.com`) is a **Cloudflare Worker serving static files** (config in `wrangler.jsonc`: Worker name `girl-in-a-bookstore`, assets directory `./public`, no script). It is connected to the GitHub repo `pillowsoft/a-girl-in-a-bookstore` with Cloudflare Workers Builds. **Never delete or rename `wrangler.jsonc`.** The rule that makes this easy:
 
-
-The live site is hosted on **Cloudflare Pages**, connected to the GitHub repo `pillowsoft/a-girl-in-a-bookstore`. The rule that makes this easy:
-
-- A push to any **branch other than `main`** automatically gets its own **preview website** with a private-ish link like `https://<branch-name>.<project>.pages.dev`.
+- A push to any **branch other than `main`** is built as a **preview version** with its own link, like `https://<id>-girl-in-a-bookstore.<account>.workers.dev`. Cloudflare posts it on the GitHub commit or PR and in the dashboard under the Worker's Deployments.
 - A change that reaches **`main`** goes **live** within a minute or two.
 
 ### Normal flow, step by step
 
 1. **Check the change locally first.** Run `just serve` and open http://localhost:8000. Then run `just lint` to catch broken image or link paths.
-2. **Make a branch** with a descriptive name, e.g. `new-lisbon-photos`:
-   `git switch -c new-lisbon-photos`
-3. **Commit** the changes (short plain-language message) and **push**:
-   `git push -u origin new-lisbon-photos`
-4. **Give her the preview link.** It is `https://<branch>.<project>.pages.dev` (use `-` for any `/` in the branch name). If the link doesn't work yet, wait a minute for the build. Check the deployment list in the Cloudflare dashboard or with the API below.
+2. **Make a branch** with a descriptive name, e.g. `new-lisbon-photos`: `git switch -c new-lisbon-photos`
+3. **Commit** the changes (short plain-language message) and **push**: `git push -u origin new-lisbon-photos`
+4. **Find and give her the preview link.** Use `gh pr create --fill` if needed and read the Cloudflare comment, or `gh api repos/pillowsoft/a-girl-in-a-bookstore/commits/<sha>/check-runs` for the link, or check the dashboard. If it isn't there yet, wait a minute. If you truly can't find it, tell her honestly and ask the site helper, don't guess a URL.
 5. **She looks at it** on her phone and computer and tells you what to adjust. Repeat 1-4 on the same branch; the preview updates each push.
 6. **When she says to publish**, merge into `main` and push (a pull request on GitHub is fine, or `git switch main && git merge <branch> && git push`). Then confirm the live site shows the change.
 7. Delete the finished branch.
@@ -142,34 +176,18 @@ The live site is hosted on **Cloudflare Pages**, connected to the GitHub repo `p
 
 The previous version is never lost. Either:
 - `git revert <commit>` then push to `main` (cleanest), or
-- In the Cloudflare dashboard: Workers & Pages → the project → Deployments → pick an older good one → **Rollback**.
+- In the Cloudflare dashboard: Workers & Pages → `girl-in-a-bookstore` → Deployments → pick an older good version → **Rollback**.
 
-### Using Cloudflare's API / wrangler (optional, once authenticated)
+### Wrangler and the API are optional
 
-One-time setup, which the site owner or her helper does once on the computer:
-
-```bash
-npx wrangler login          # opens a browser to log in to Cloudflare
-npx wrangler whoami         # confirms it worked
-```
-
-For automation, create an **API token** in the Cloudflare dashboard (My Profile → API Tokens, template "Edit Cloudflare Workers" or custom with *Account → Cloudflare Pages → Edit*) and set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in the environment. **Never put the token in a file in this repo** or in a chat message; the repo is public.
-
-With that you can:
+Rachel doesn't need Wrangler. If it's installed and logged in (`wrangler login`), these help:
 
 ```bash
-# List recent deployments (preview and production) for the project
-npx wrangler pages deployment list --project-name=<project>
-
-# Direct-upload a preview without Git (only works if the Pages project is NOT Git-connected)
-npx wrangler pages deploy public --project-name=<project> --branch=preview
+wrangler deployments list --name girl-in-a-bookstore   # recent deployments
+just deploy                                            # manual deploy, bypasses GitHub: only if asked
 ```
 
-The same data is available over the REST API at
-`https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/<project>/deployments`
-(send the header `Authorization: Bearer $CLOUDFLARE_API_TOKEN`). Use it to read each deployment's preview URL and status.
-
-Note: a Pages project is either **Git-connected** (the normal flow above) or **direct-upload** (wrangler only). Don't mix them. This site uses the Git-connected flow, so prefer branches and pushes, and use the API only for reading status or rolling back.
+For scripts, use an API token scoped to Workers, set as `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in the environment. **Never put a token in a file in this repo** or in a chat message; the repo is public. Prefer branch pushes over `just deploy`, since a manual deploy skips the preview step.
 
 ### Before telling her it's done, check
 

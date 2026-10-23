@@ -1,4 +1,4 @@
-# Owner Setup Guide: GitHub, Cloudflare Pages and Rachel's Workflow
+# Owner Setup Guide: GitHub, Cloudflare and Rachel's Workflow
 
 For the person setting the site up (one-time, about 30 minutes). Rachel's day-to-day guide is `RACHEL-GUIDE.md`.
 
@@ -10,40 +10,19 @@ Rachel edits (with Claude) → pushes a branch to GitHub → Cloudflare builds a
 ```
 
 - **GitHub** stores the site: `github.com/pillowsoft/a-girl-in-a-bookstore` (public).
-- **Cloudflare Pages** watches the repo. Every branch gets a preview URL; `main` is the live site.
-- There is **no build step**. The site is plain files in `public/`.
+- **Cloudflare** hosts it as a **Worker with static assets** (not a Pages project). Rachel's account already has one, `girl-in-a-bookstore`, serving `girlinabookstore.com`, deployed by upload.
+- There is **no build step**. The site is plain files in `public/`; `wrangler.jsonc` points Cloudflare at that folder.
+- With **no Worker script** in `wrangler.jsonc`, every request is served straight from Cloudflare's edge network as a static file. No Worker code runs. Static asset requests are free and unlimited (verify on Cloudflare's current pricing page).
 
-Nobody needs Wrangler or the Cloudflare API for this. Git pushes are enough.
+Nobody needs Wrangler or the Cloudflare API for day-to-day work. Git pushes are enough.
 
-## Part 1: Create the Cloudflare Pages project
+## Part 1: Connect the existing Worker to GitHub
 
-1. Log in at https://dash.cloudflare.com and choose the correct account.
-2. Go to **Workers & Pages → Create → Pages → Connect to Git**.
-3. Click **Connect GitHub**. A GitHub window asks to install the Cloudflare Pages app. Allow it for **only** the repo `a-girl-in-a-bookstore`, not "all repositories".
-4. Select the repo and click **Begin setup**.
-5. Fill in:
+The Worker already exists and has the domain. Connect it to the repo in place (Cloudflare calls this **Workers Builds**), which keeps the name and the domain.
 
-   | Setting | Value |
-   |---|---|
-   | Project name | e.g. `girl-in-a-bookstore` (this becomes `girl-in-a-bookstore.pages.dev`) |
-   | Production branch | `main` |
-   | Framework preset | None |
-   | Build command | *(leave empty)* |
-   | Build output directory | `public` |
-
-6. Click **Save and Deploy**. In about a minute the site is live at `https://<project-name>.pages.dev`.
-
-Check that all 7 pages load and the images and fonts show.
-
-> Cloudflare is gradually moving new projects to "Workers with static assets". If the dashboard steers you there, the same idea applies: connect the GitHub repo, no build command, asset directory `public`. The Pages route above remains the simplest for a static site.
-
-### Rachel's actual situation: it is a Worker, not a Pages project
-
-Checked with `wrangler deployments list`: the existing `girl-in-a-bookstore` on her account (`girlinabookstore.com`) is a **Cloudflare Worker with static assets**, deployed by upload. It is **not** a Pages project, so the "create a new project and move the domain" route below doesn't apply. Workers can be connected to GitHub in place (**Workers Builds**), which keeps the name and the domain.
-
-1. The repo now has `wrangler.jsonc` (name `girl-in-a-bookstore`, assets directory `./public`). Make sure it is on `main` first.
-2. Cloudflare dashboard → **Workers & Pages → girl-in-a-bookstore → Settings → Builds → Connect**.
-3. Choose GitHub, authorize the Cloudflare app for **only** this repo, and select `pillowsoft/a-girl-in-a-bookstore`.
+1. Make sure `wrangler.jsonc` is on `main` first. It sets the Worker `name` (`girl-in-a-bookstore`, **must match the dashboard name exactly** or the build fails) and the assets directory `./public`.
+2. Cloudflare dashboard (Rachel's account) → **Workers & Pages → girl-in-a-bookstore → Settings → Builds → Connect**.
+3. Choose GitHub. The GitHub window asks to install the Cloudflare app: allow it for **only** `pillowsoft/a-girl-in-a-bookstore`, not "all repositories". Select the repo.
 4. Settings:
 
    | Setting | Value |
@@ -54,57 +33,34 @@ Checked with `wrangler deployments list`: the existing `girl-in-a-bookstore` on 
    | Non-production branch deploy command | `npx wrangler versions upload` |
    | Root directory | `/` |
 
-5. Save, then push a trivial change to a branch and confirm a preview appears. Merge to `main` and confirm the live site updates.
-6. Preview URLs for Workers must be enabled (**Settings → Domains & Routes → Preview URLs**). They look like `<id>-girl-in-a-bookstore.<account>.workers.dev`. Cloudflare reports the URL on the GitHub commit or PR, and in **Deployments**. Give that link to Rachel. Previews are **not** `*.pages.dev` here.
-7. The Worker name in `wrangler.jsonc` **must match** the Worker's name in the dashboard, or the build fails.
+5. Save. Push a trivial change to a branch and confirm a preview appears. Merge to `main` and confirm the live site updates.
 
-Heads up: the live Worker has a `fetch` handler, so it runs some script I can't see. `wrangler.jsonc` deploys the site as **assets only** (no script), which serves `index.html` at `/` and every file under `public/`. Compare the live site with the first connected deploy before relying on it, especially any redirects or clean URLs like `/about`.
+### Before you rely on it: compare with the old Worker
 
-The Pages-only instructions in Parts 1-3 (`.pages.dev` URLs, Pages Access policy, Pages rollback) differ for Workers. Rollback is under the Worker's **Deployments** tab. To keep previews private, use Cloudflare Access on the preview URLs (Settings → Domains & Routes).
+The live Worker has a `fetch` handler, an older script I couldn't see. `wrangler.jsonc` deploys **assets only** (no script), which serves `index.html` at `/` and every file under `public/`. After the first connected deploy, check:
 
-### Pages only: already have a Direct Upload Pages project? Convert it to Git
+- All pages load, including clean URLs like `/about` and `/about.html`.
+- Images, fonts, menu, search and page transitions work.
+- `https://girlinabookstore.com/sitemap.xml` and `/robots.txt` load.
+- Any redirect the old script performed still works (if you know of one).
 
-Cloudflare **cannot** convert a Direct Upload Pages project to Git-connected, and there is no setting for it. The way around it is to create a new Git-connected project, move the domain across, and retire the old one. Visitors see no downtime if you do it in this order.
+If something is missing, the old script is the cause; ask Claude to port that behavior into `wrangler.jsonc` (redirects and headers can usually be handled without a script).
 
-1. **Note what the old project uses.** Open it and write down its name, its custom domain(s), and any environment variables or settings. A plain static site usually has none.
-2. **Create the new Git-connected project** with the steps above. Its name must differ from the old one (names are unique), e.g. `girl-in-a-bookstore-git`. Don't touch the domain yet.
-3. **Check the new `.pages.dev` site** thoroughly: all 7 pages, images, fonts, menu, search.
-4. **Move the custom domain:**
-   1. In the **old** project: **Custom domains** → remove the domain.
-   2. In the **new** project: **Custom domains** → **Set up a domain** → add it.
+## Part 2: Previews, privacy and domain
 
-   If the domain's DNS is on Cloudflare (it usually is), the DNS record updates automatically and the switch takes under a minute. If the DNS is elsewhere, repoint the CNAME to `<new-project>.pages.dev`.
-5. **Check the live domain** shows the site (hard-refresh).
-6. **Retire the old project** after a few days: old project → **Settings → Delete project**. This is irreversible, but the files all live in GitHub.
+### Preview links
 
-The new project's address will be `<new-name>.pages.dev`. That only matters if anyone used the old `.pages.dev` link. Once the custom domain is set, it doesn't.
-
-If you'd rather keep the original `.pages.dev` name, delete the old project first and recreate it with that name. Do this **only after** pointing the custom domain somewhere else or accepting a few minutes of downtime.
-
-## Part 2: Preview deployments
-
-Preview deployments are on by default for branches other than `main`. Confirm under **the project → Settings → Builds & deployments → Branch control**: "Preview branches" should be **All non-Production branches**.
-
-Preview link format:
-- Per branch: `https://<branch-name>.<project-name>.pages.dev` (slashes in branch names become `-`, long names are truncated)
-- Per commit: `https://<commit-hash>.<project-name>.pages.dev`
-
-The PR check or the dashboard's **Deployments** tab shows the exact URL.
+Non-production branches get a preview version. Enable **Settings → Domains & Routes → Preview URLs** on the Worker. Preview links look like `https://<id>-girl-in-a-bookstore.<account>.workers.dev`, and Cloudflare reports the URL on the GitHub commit or PR and in **Deployments**. Give that link to Rachel.
 
 ### Keep previews private (recommended)
 
-The repo is public and preview links are guessable, so unfinished work could be seen. To lock previews down:
+The repo is public and preview links are hard to guess but not secret. To lock previews down, put **Cloudflare Access** in front of the preview URLs (Settings → Domains & Routes → Preview URLs → Access policy, or Zero Trust → Access → Applications) and allow only your emails and Rachel's. Visitors sign in with a one-time email code. Production stays public.
 
-1. **Project → Settings → General → Access policy → Enable**.
-2. Add the emails allowed to view previews (yours and Rachel's).
+### Custom domain
 
-Visitors then sign in with a one-time email code. Production stays public.
+Already attached (`girlinabookstore.com`). To add another: Worker → **Settings → Domains & Routes → Add → Custom domain**. HTTPS is automatic.
 
-## Part 3: Custom domain (when ready)
-
-**Project → Custom domains → Set up a domain.** If the domain is on Cloudflare, it configures DNS automatically. If it's elsewhere, follow the CNAME instructions shown. HTTPS is automatic.
-
-## Part 4: Set up Rachel
+## Part 3: Set up Rachel
 
 ### Who owns the repo? (decision made)
 
@@ -153,31 +109,63 @@ Open Claude Code in that folder. The skill in `.claude/skills/edit-website/SKILL
 
 Test it together: ask Claude to "change the home page tagline to something silly, and show me a preview", confirm a preview link appears and works, then discard the branch.
 
-## Part 5: Things to know
 
-- **Rollback:** project → **Deployments** → pick an older good one → **Rollback**. Or `git revert` the bad commit and push.
-- **Deployment logs:** project → Deployments → click one.
-- **Cost:** a static site on Cloudflare Pages is free at this scale (500 builds/month on the free plan, unlimited bandwidth).
+## Part 4: Things to know
+
+- **Rollback:** Worker → **Deployments** → pick an older good version → **Rollback**. Or `git revert` the bad commit and push.
+- **Build logs:** Worker → Deployments (or Builds) → click one.
+- **After adding a page or blog post,** run `just sitemap` to refresh `public/sitemap.xml`, and commit it. (The skill does this for Rachel.)
 - **Newsletter and contact forms do nothing yet.** They show a thank-you but collect no emails. Connect a real mailing-list service before launch.
 - **Footer social links** point at the generic Instagram and YouTube homepages. Replace them with Rachel's.
 - **"Coming soon" cards** link nowhere until stories exist.
+- **Not built, on purpose:** RSS feed, category filters, comments. Add when asked.
 
 ## Optional: Cloudflare API / Wrangler
 
-Only needed for automation, such as listing deployments from a script.
+Only needed for automation, such as listing deployments from a script. Install Wrangler (`npm i -g wrangler`) and run `wrangler login`, or create an **API token** (My Profile → API Tokens, scoped to Workers edit/read) and set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. Examples:
 
-1. Dashboard → My Profile → **API Tokens → Create Token**, with *Account → Cloudflare Pages → Read* (or Edit if rolling back).
-2. Use as `Authorization: Bearer <token>` against
-   `https://api.cloudflare.com/client/v4/accounts/<account-id>/pages/projects/<project>/deployments`
-3. **Never commit the token.** The repo is public.
+```bash
+wrangler deployments list --name girl-in-a-bookstore
+just deploy        # manual deploy, bypassing GitHub
+```
+
+**Never commit the token.** The repo is public.
 
 ## Troubleshooting
 
 | Problem | Fix |
 |---|---|
-| Build fails | Check that build command is empty and output directory is exactly `public`. |
-| Site shows a blank page or 404 | Same: output directory wrong. |
-| No preview link after a push | Wait about a minute. Check Deployments. Confirm Preview branches is set to All non-Production. |
+| Build fails with a name error | The `name` in `wrangler.jsonc` doesn't match the Worker's dashboard name. |
+| Build fails otherwise | Build command must be empty and deploy command `npx wrangler deploy`. |
+| Site is blank or 404 | `assets.directory` in `wrangler.jsonc` must be `./public`. |
+| No preview link after a push | Wait about a minute. Check Deployments. Confirm Preview URLs are enabled and the non-production deploy command is `npx wrangler versions upload`. |
 | Old CSS still showing | Bump `styles.css?v=N` in the HTML files, then hard-refresh. |
-| Rachel's push is rejected | She hasn't accepted the GitHub invitation, doesn't have Write access (Part 4), or `gh auth login` isn't done. |
-| Preview asks for a login | The access policy is on (Part 2). Add her email. |
+| Rachel's push is rejected | She hasn't accepted the GitHub invitation, doesn't have Write access (Part 3), or `gh auth login` isn't done. |
+| Preview asks for a login | The Access policy is on (Part 2). Add her email. |
+
+## Appendix: if you ever move to Cloudflare Pages
+
+Not recommended: Workers is the current direction for static sites, the existing Worker already holds the domain, and moving gains nothing for this site. If you ever need to anyway:
+
+### Create a Pages project
+
+1. Log in at https://dash.cloudflare.com and choose the correct account.
+2. Go to **Workers & Pages → Create → Pages → Connect to Git**.
+3. Click **Connect GitHub**. A GitHub window asks to install the Cloudflare Pages app. Allow it for **only** the repo `a-girl-in-a-bookstore`, not "all repositories".
+4. Select the repo and click **Begin setup**.
+5. Fill in:
+
+   | Setting | Value |
+   |---|---|
+   | Project name | e.g. `girl-in-a-bookstore` (this becomes `girl-in-a-bookstore.pages.dev`) |
+   | Production branch | `main` |
+   | Framework preset | None |
+   | Build command | *(leave empty)* |
+   | Build output directory | `public` |
+
+6. Click **Save and Deploy**. In about a minute the site is live at `https://<project-name>.pages.dev`.
+
+Check that all 7 pages load and the images and fonts show.
+
+
+Pages previews are `https://<branch>.<project>.pages.dev`, and a project can't be converted between Direct Upload and Git, so you create a new Git-connected project, check it, move the custom domain (remove it from the old project, add it to the new), then delete the old one after a few days. Rewrite the skill's preview and publish instructions to match.

@@ -748,6 +748,7 @@ textarea {
 
 .story-card__image {
   position: relative;
+  display: block;
   aspect-ratio: 4 / 5;
   margin-bottom: 25px;
   overflow: hidden;
@@ -788,6 +789,81 @@ textarea {
   margin: 0;
   color: var(--ink-soft);
   font-size: 0.9rem;
+}
+
+.journal-list {
+  padding: clamp(60px, 8vw, 110px) 0;
+  row-gap: 60px;
+}
+
+.journal-list .story-card:nth-child(2) {
+  padding-top: 0;
+}
+
+.post {
+  padding: clamp(60px, 9vw, 120px) 0;
+}
+
+.post__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.post__meta {
+  margin: 0 0 18px;
+  color: var(--rust-dark);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.post h1 {
+  margin: 0 0 28px;
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.post__lede {
+  margin: 0 0 40px;
+  color: var(--ink-soft);
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  font-style: italic;
+  line-height: 1.35;
+}
+
+.post p {
+  margin: 0 0 1.4em;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.7;
+}
+
+.post h2 {
+  margin: 2em 0 0.6em;
+  font-family: var(--serif);
+  font-size: 1.9rem;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.post img {
+  height: auto;
+  margin: 2em 0 0.6em;
+}
+
+.post figcaption {
+  margin-bottom: 2em;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.post__back {
+  margin-top: 3em;
 }
 
 .author-section {
@@ -936,6 +1012,10 @@ textarea {
 
 .hero-fashion {
   background-image: url('assets/images/fashion-01-960.webp');
+}
+
+.hero-journal {
+  background-image: url('assets/images/train-960.webp');
 }
 
 .page-intro {
@@ -1407,6 +1487,10 @@ textarea {
 
   .hero-fashion {
     background-image: url('assets/images/fashion-01-1920.webp');
+  }
+
+  .hero-journal {
+    background-image: url('assets/images/train-1920.webp');
   }
 
   .about-hero__image {

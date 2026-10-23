@@ -1,5 +1,6 @@
 const pages = [
   { title: 'Home', url: 'index.html', description: 'The literary travel journal' },
+  { title: 'Journal', url: 'journal.html', description: 'Dispatches, newest first' },
   { title: 'About Rachel', url: 'about.html', description: 'Meet the girl in a bookstore' },
   { title: 'Travel', url: 'travel.html', description: 'Bookstores, post offices, and places' },
   { title: 'Cuisine', url: 'cuisine.html', description: 'Tables and tastes along the way' },
@@ -113,6 +114,7 @@ class SiteFooter extends HTMLElement {
           <div>
             <p class="footer-heading">Explore</p>
             <ul class="footer-links">
+              <li><a href="journal.html">Journal</a></li>
               <li><a href="about.html">About Rachel</a></li>
               <li><a href="travel.html">Travel</a></li>
               <li><a href="books.html">Books</a></li>

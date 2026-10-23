@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dispatches from Rachel Reynolds: travel notes, reading lists, and stories from the road, newest first.">
+  <meta name="theme-color" content="#171814">
+  <title>Journal — Girl in a Bookstore</title>
+  <link rel="preload" as="image" href="assets/images/train-960.webp" media="(max-width: 1199px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/train-1920.webp" media="(min-width: 1200px)" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css?v=8">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <site-header></site-header>
+  <main id="main-content">
+    <section class="page-hero hero-journal" aria-labelledby="page-title">
+      <div class="shell page-hero__content">
+        <p class="eyebrow">From the notebook</p>
+        <h1 class="display" id="page-title">The<br>journal.</h1>
+        <p>Dispatches from the road, newest first.</p>
+      </div>
+    </section>
+
+    <section class="shell">
+      <div class="journal-grid journal-list">
+        <!-- NEW POSTS GO HERE, newest first (see the edit-website skill) -->
+      </div>
+    </section>
+
+    <section class="coming-soon-band">
+      <div class="shell reveal">
+        <p class="eyebrow">Check back soon</p>
+        <h2 class="section-title">The first dispatches are on their way.</h2>
+        <p>Join the mailing list to hear when the first story is posted.</p>
+      </div>
+    </section>
+
+    <section class="newsletter" id="newsletter" aria-labelledby="newsletter-title">
+      <div class="shell newsletter-grid">
+        <div class="reveal">
+          <p class="eyebrow">Letters from the road</p>
+          <h2 class="section-title" id="newsletter-title">Get the next dispatch.</h2>
+        </div>
+        <form class="newsletter-form reveal" data-newsletter-form>
+          <label class="visually-hidden" for="journal-email">Email address</label>
+          <input id="journal-email" type="email" placeholder="Your email address" autocomplete="email" required>
+          <button class="button button--light" type="submit">Subscribe</button>
+          <p class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <site-footer></site-footer>
+</body>
+</html>
