@@ -6,18 +6,29 @@
   <meta name="description" content="ONE-SENTENCE SUMMARY (shows in Google)">
   <meta name="theme-color" content="#171814">
   <title>POST TITLE — Girl in a Bookstore</title>
-  <link rel="stylesheet" href="styles.css?v=8">
-  <script src="site.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=9">
+  <script src="site.js?v=2" defer></script>
 </head>
 <body>
   <site-header></site-header>
   <main id="main-content">
     <article class="post">
       <div class="shell post__inner">
-        <p class="post__meta">CATEGORY · <time datetime="YYYY-MM-DD">Month D, YYYY</time></p>
-        <h1>POST TITLE</h1>
+        <!-- CATEGORY is travel, cuisine or books: the page this post is listed on. -->
+        <p class="post__meta"><a href="CATEGORY.html">Category</a> · <time datetime="YYYY-MM-DD">Month D, YYYY</time></p>
+        <h1 class="post-title-morph" style="view-transition-name: post-title-SHORT-NAME">POST TITLE</h1>
         <p class="post__lede">One or two sentences that set the scene.</p>
+      </div>
 
+      <!-- Cover photo. Its view-transition-name must match the card's, so the card morphs into it. -->
+      <figure class="shell post__hero">
+        <div class="post__hero-image post-image-morph" style="view-transition-name: post-image-SHORT-NAME">
+          <img src="assets/images/COVER-960.webp" srcset="assets/images/COVER-480.webp 480w, assets/images/COVER-960.webp 960w, assets/images/COVER-1440.webp 1440w" sizes="(max-width: 720px) calc(100vw - 34px), min(1040px, calc(100vw - 48px))" width="WIDTH" height="HEIGHT" alt="Describe the cover photo" decoding="async" fetchpriority="high">
+        </div>
+        <figcaption>Optional caption or photo credit.</figcaption>
+      </figure>
+
+      <div class="shell post__inner">
         <p>Paragraph.</p>
 
         <h2>Optional section heading</h2>
@@ -28,7 +39,15 @@
           <figcaption>Optional caption.</figcaption>
         </figure>
 
-        <a class="text-link post__back" href="journal.html"><span aria-hidden="true">←</span> Back to the journal</a>
+        <!-- Only for photos Rachel didn't take: credit each one, or delete this block. -->
+        <aside class="post__credits" aria-label="Photo credits">
+          <h2>Photo credits</h2>
+          <ul>
+            <li>WHAT IT SHOWS: <a href="SOURCE PAGE URL">PHOTOGRAPHER</a>, <a href="LICENSE URL">LICENSE</a></li>
+          </ul>
+        </aside>
+
+        <a class="text-link post__back" href="CATEGORY.html"><span aria-hidden="true">←</span> Back to Category</a>
       </div>
     </article>
   </main>

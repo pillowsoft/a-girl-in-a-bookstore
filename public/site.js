@@ -1,6 +1,5 @@
 const pages = [
   { title: 'Home', url: 'index.html', description: 'The literary travel journal' },
-  { title: 'Journal', url: 'journal.html', description: 'Dispatches, newest first' },
   { title: 'About Rachel', url: 'about.html', description: 'Meet the girl in a bookstore' },
   { title: 'Travel', url: 'travel.html', description: 'Bookstores, post offices, and places' },
   { title: 'Cuisine', url: 'cuisine.html', description: 'Tables and tastes along the way' },
@@ -15,9 +14,17 @@ const icons = {
   close: '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m5 5 14 14M19 5 5 19"></path></svg>',
 };
 
+// Blog posts are named after the page that lists them: travel-<name>.html, cuisine-<name>.html,
+// books-<name>.html (served without ".html" on the live site). A post counts as part of its page.
+const postPattern = /^(travel|cuisine|books)-[a-z0-9-]+(\.html)?$/;
+
+function sectionFile(file) {
+  const match = file.match(postPattern);
+  return match ? `${match[1]}.html` : file;
+}
+
 function currentPage() {
-  const file = window.location.pathname.split('/').pop() || 'index.html';
-  return file || 'index.html';
+  return sectionFile(window.location.pathname.split('/').pop() || 'index.html');
 }
 
 class SiteHeader extends HTMLElement {
@@ -114,9 +121,9 @@ class SiteFooter extends HTMLElement {
           <div>
             <p class="footer-heading">Explore</p>
             <ul class="footer-links">
-              <li><a href="journal.html">Journal</a></li>
               <li><a href="about.html">About Rachel</a></li>
               <li><a href="travel.html">Travel</a></li>
+              <li><a href="cuisine.html">Cuisine</a></li>
               <li><a href="books.html">Books</a></li>
               <li><a href="videos.html">Videos</a></li>
             </ul>
@@ -222,8 +229,10 @@ function pageFile(url) {
   return url.pathname.split('/').pop() || 'index.html';
 }
 
-function isJournalPage(url) {
-  return url.origin === window.location.origin && pages.some((page) => page.url === pageFile(url));
+function isSitePage(url) {
+  const file = pageFile(url);
+  return url.origin === window.location.origin
+    && (pages.some((page) => page.url === file) || postPattern.test(file));
 }
 
 function closeTransientUI() {
@@ -236,7 +245,7 @@ function closeTransientUI() {
 }
 
 function updateActiveNavigation(url) {
-  const activeFile = pageFile(url);
+  const activeFile = sectionFile(pageFile(url));
   document.querySelectorAll('site-header nav a').forEach((link) => {
     const isActive = pageFile(new URL(link.href)) === activeFile;
     if (isActive) link.setAttribute('aria-current', 'page');
@@ -266,6 +275,14 @@ async function loadDocument(url) {
   return nextDocument;
 }
 
+// Let a post's cover photo load before the card morphs into it (gives up after a moment).
+function waitForMorphImages(main) {
+  const images = [...main.querySelectorAll('.post-image-morph img')];
+  if (!images.length) return Promise.resolve();
+  const decoded = Promise.all(images.map((image) => image.decode().catch(() => {})));
+  return Promise.race([decoded, new Promise((resolve) => setTimeout(resolve, 800))]);
+}
+
 async function replacePage(url) {
   document.documentElement.classList.add('is-navigating');
   document.querySelector('main')?.setAttribute('aria-busy', 'true');
@@ -277,6 +294,7 @@ async function replacePage(url) {
     if (!currentMain) throw new Error('The current page has no main content.');
 
     closeTransientUI();
+    await waitForMorphImages(nextMain);
     const update = () => {
       currentMain.replaceWith(nextMain);
       document.body.className = nextDocument.body.className;
@@ -314,7 +332,7 @@ if ('navigation' in window) {
       || event.downloadRequest
       || event.formData
       || (sourceLink?.target && sourceLink.target !== '_self')
-      || !isJournalPage(destination)
+      || !isSitePage(destination)
     ) return;
 
     event.intercept({
@@ -347,7 +365,7 @@ if ('navigation' in window) {
 
     const destination = new URL(link.href);
     const sameDocumentHash = destination.pathname === window.location.pathname && destination.hash;
-    if (!isJournalPage(destination) || sameDocumentHash) return;
+    if (!isSitePage(destination) || sameDocumentHash) return;
 
     event.preventDefault();
     history.pushState({}, '', destination);
